@@ -1,4 +1,4 @@
-name: Build and Test (Java 1.8)
+name: Deploy Game of life 
 
 on:
   push:
@@ -9,8 +9,9 @@ on:
   
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    #runs-on: ubuntu-latest
+    runs-on: self-hosted
+    
     steps:
       # Step 1: Checkout code
       - name: Checkout repository
@@ -22,6 +23,11 @@ jobs:
         with:
           distribution: 'temurin'   # AdoptOpenJDK successor
           java-version: '8'
+
+      - name: Install Maven
+        run: |
+          sudo yum install maven -y
+
 
       # Step 3: Cache Maven dependencies 
       - name: Cache Maven repository
