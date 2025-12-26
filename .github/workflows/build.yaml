@@ -40,13 +40,13 @@ jobs:
 
       # Step 4: Build and test
       - name: Build with Maven
-        run: mvn -B clean install
+        run: mvn clean install
 
 
       - name: Deploy WAR to Tomcat
         run: |
               WAR_FILE=$(ls gameoflife-web/target/*.war | head -n 1)
-              APP_NAME=myapp
+              APP_NAME=gameoflife
               curl -u "${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }}" \
                 --upload-file "$WAR_FILE" \
                 "http://${{ secrets.TOMCAT_HOST }}:8081/manager/text/deploy?path=/$APP_NAME&update=true"
